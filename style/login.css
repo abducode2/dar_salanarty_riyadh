@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    background: linear-gradient(135deg, #1e3a6f 0%, #2c5aa0 100%);
+    background: linear-gradient(135deg, #4CAF50 0%, #046738 100%);
     font-family: 'Cairo', sans-serif;
     display: flex;
     align-items: center;
@@ -30,7 +30,26 @@ body {
     flex-direction: column;
 }
 
-.login-header {
+.logo-container {
+
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #d1cece;
+
+}
+
+.logo-container img {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+
+}
+
+/* .login-header {
     display: flex;
     align-items: center;
     gap: 20px;
@@ -39,28 +58,21 @@ body {
     border-bottom: 2px solid #f0f0f0;
 }
 
-.login-header .logo {
-    width: 70px;
-    height: 70px;
-    background: linear-gradient(135deg, #2c5aa0, #1e3a6f);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 30px;
-}
+
 
 .login-header h1 {
     margin: 0;
     color: #2c5aa0;
     font-size: 28px;
-}
+} */
 
 .login-header .subtitle {
     margin: 5px 0 0 0;
     color: #666;
     font-size: 16px;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
 }
 
 .login-body {
@@ -120,7 +132,7 @@ body {
 }
 
 .form-group label i {
-    color: #2c5aa0;
+    color: #046738;
 }
 
 .form-group input {
@@ -136,7 +148,7 @@ body {
 
 .form-group input:focus {
     outline: none;
-    border-color: #2c5aa0;
+    border-color: #046738;
     box-shadow: 0 0 0 3px rgba(44, 90, 160, 0.1);
 }
 
@@ -159,7 +171,7 @@ body {
 }
 
 .password-toggle:hover {
-    color: #2c5aa0;
+    color: #046738;
 }
 
 .form-options {
@@ -205,7 +217,7 @@ body {
 }
 
 .checkbox-container input:checked~.checkmark {
-    background-color: #2c5aa0;
+    background-color: #046738;
 }
 
 .checkmark:after {
@@ -285,7 +297,7 @@ body {
 }
 
 .contact-info a {
-    color: #2c5aa0;
+    color: #046738;
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -311,7 +323,7 @@ body {
 /* الشريط الجانبي */
 .login-sidebar {
     width: 400px;
-    background: linear-gradient(135deg, #2c5aa0 0%, #1e3a6f 100%);
+    background: linear-gradient(135deg, #046738 0%, #2E7D32 100%);
     color: white;
     padding: 40px;
     display: flex;

@@ -34,16 +34,22 @@ body {
   text-align: right;
   display: block;
   margin-top: 15px;
+  font-size: 25px;
   font-weight: bold;
   color: #34495e;
 }
 
 .orientation-options {
   display: flex;
-  justify-content: center;
+  justify-content: right;
   gap: 20px;
   margin: 15px 0;
   direction: ltr;
+  border: 1px solid #646060;
+  border-radius: 6px;
+  width: 150px;
+padding: 0 10px;
+background: #d6dbe2;
 }
 
 .orientation-options label {
@@ -352,7 +358,7 @@ body {
 
 
 .certificates-header {
-  background: linear-gradient(135deg, #2c5aa0 0%, #1e3a6f 100%);
+  background: #046738;
   color: white;
   padding: 30px;
   border-radius: 10px;

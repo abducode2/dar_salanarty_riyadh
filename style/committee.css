@@ -1,7 +1,7 @@
 /* تنسيقات صفحة لجنة الإدارة */
 
 .committee-header {
-    background: linear-gradient(135deg, #2c5aa0 0%, #1e3a6f 100%);
+    background: linear-gradient(135deg, #046738 0%, #2E7D32 100%);
     color: white;
     padding: 30px;
     border-radius: 10px;
@@ -97,7 +97,7 @@
 .section-icon {
     width: 50px;
     height: 50px;
-    background: linear-gradient(135deg, #2c5aa0, #1e3a6f);
+    background: linear-gradient(135deg, #046738, #2E7D32);
     border-radius: 50%;
     display: flex;
     align-items: center;

@@ -5,8 +5,7 @@
 }
 
 header {
-    background: linear-gradient(135deg, var(--primary-color) 0%, #1a3a6d 100%);
-    color: white;
+background: #046738;    color: white;
     padding: 25px 0;
     text-align: center;
     box-shadow: var(--box-shadow);
