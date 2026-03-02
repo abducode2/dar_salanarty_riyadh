@@ -49,22 +49,7 @@ body {
 
 }
 
-/* .login-header {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 40px;
-    padding-bottom: 20px;
-    border-bottom: 2px solid #f0f0f0;
-}
 
-
-
-.login-header h1 {
-    margin: 0;
-    color: #2c5aa0;
-    font-size: 28px;
-} */
 
 .login-header .subtitle {
     margin: 5px 0 0 0;
@@ -103,7 +88,7 @@ body {
     font-size: 28px;
 }
 
-.login-body>p {
+.login-body p {
     color: #666;
     margin-bottom: 40px;
     font-size: 16px;
@@ -450,9 +435,10 @@ body {
 
     .login-sidebar {
         width: 100%;
-        order: -1;
+
         padding: 30px;
     }
+
 
     .sidebar-content {
         max-width: 100%;

@@ -53,7 +53,7 @@ function checkLoginLock() {
       const remaining = Math.ceil((lockData.unlockTime - now) / 1000 / 60);
       showMessage(
         `حسابك مقفل مؤقتاً. يرجى المحاولة بعد ${remaining} دقيقة`,
-        "error"
+        "error",
       );
       disableLoginForm();
     } else {
@@ -95,7 +95,7 @@ async function handleLogin(event) {
   if (isAccountLocked()) {
     showMessage(
       "حسابك مقفل مؤقتاً بسبب عدة محاولات فاشلة. يرجى المحاولة لاحقاً.",
-      "error"
+      "error",
     );
     return;
   }
@@ -224,28 +224,6 @@ async function getStoredPassword() {
 }
 
 // التعامل مع تسجيل الدخول الناجح
-// async function handleSuccessfulLogin(username, rememberMe) {
-//   // إعادة تعيين عداد المحاولات
-//   resetLoginAttempts();
-
-//   // إنشاء جلسة
-//   createSession(username, rememberMe);
-
-//   // تسجيل وقت الدخول
-//   logLoginTime();
-
-//   // تحديث عدد المستخدمين النشطين
-//   updateActiveUsers();
-
-//   // إظهار رسالة النجاح
-//   showMessage("✅ تم تسجيل الدخول بنجاح! جاري التوجيه...", "success");
-
-//   // توجيه المستخدم بعد تأخير قصير
-//   setTimeout(() => {
-//     window.location.href = "index.html";
-//   }, 1500);
-// }
-// في login.js، نعدل handleSuccessfulLogin:
 
 async function handleSuccessfulLogin(username, rememberMe) {
   // جلب بيانات المسؤول
@@ -289,7 +267,7 @@ function handleFailedLogin() {
     lockAccount();
     showMessage(
       `تم قفل الحساب مؤقتاً بسبب ${maxAttempts} محاولات فاشلة. يرجى المحاولة بعد 15 دقيقة.`,
-      "error"
+      "error",
     );
     disableLoginForm();
   } else {
@@ -298,7 +276,7 @@ function handleFailedLogin() {
       `❌ اسم المستخدم أو كلمة المرور غير صحيحة. لديك ${remaining} محاولة${
         remaining > 1 ? "ات" : ""
       } متبقية.`,
-      "error"
+      "error",
     );
   }
 
@@ -390,7 +368,7 @@ function handleForgotPassword(event) {
 
   showMessage(
     "لإعادة تعيين كلمة المرور، يرجى التواصل مع المسؤول على: salanarty@gmail.com",
-    "info"
+    "info",
   );
 
   // إظهار نموذج إعادة التعيين
@@ -541,28 +519,6 @@ function setupInputEffects() {
   });
 }
 
-// إنشاء جلسة المستخدم
-// function createSession(username, rememberMe) {
-//   const session = {
-//     isLoggedIn: true,
-//     username: username,
-//     loginTime: Date.now(),
-//     rememberMe: rememberMe,
-//     sessionId: generateSessionId(),
-//   };
-
-//   if (rememberMe) {
-//     // تخزين في localStorage للتذكر
-//     localStorage.setItem("userSession", JSON.stringify(session));
-//   } else {
-//     // تخزين في sessionStorage فقط
-//     sessionStorage.setItem("userSession", JSON.stringify(session));
-//   }
-
-//   // أيضا تخزين في localStorage للتحقق من جميع الصفحات
-//   localStorage.setItem("isLoggedIn", "true");
-//   localStorage.setItem("currentUser", username);
-// }
 // إنشاء جلسة المستخدم
 function createSession(admin, rememberMe) {
   const session = {
@@ -826,7 +782,7 @@ function decryptPassword(encrypted) {
   try {
     return decodeURIComponent(atob(encrypted)).replace(
       "salanarty_salt_2024",
-      ""
+      "",
     );
   } catch (e) {
     return null;
@@ -855,7 +811,7 @@ async function validateCredentials(username, password) {
       (a) =>
         a.username === username &&
         a.isActive &&
-        a.password === encryptPassword(password)
+        a.password === encryptPassword(password),
     );
 
     return admin || null;
@@ -897,7 +853,7 @@ function checkUserPermissions() {
     // إذا لم يكن لديه صلاحية، توجيه للرئيسية
     showMessage(
       "ليس لديك صلاحية الوصول للصفحة المطلوبة. تم توجيهك للرئيسية.",
-      "warning"
+      "warning",
     );
     return "index.html";
   }
