@@ -5,7 +5,8 @@
 }
 
 header {
-background: #046738;    color: white;
+    background: #046738;
+    color: white;
     padding: 25px 0;
     text-align: center;
     box-shadow: var(--box-shadow);
@@ -14,7 +15,7 @@ background: #046738;    color: white;
     margin-bottom: 40px;
 }
 
-.logo-container {
+/* .logo-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -33,7 +34,7 @@ background: #046738;    color: white;
     color: var(--primary-color);
     font-size: 28px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
+} */
 
 h1 {
     font-size: 2.2rem;
