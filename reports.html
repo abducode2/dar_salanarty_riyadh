@@ -528,19 +528,70 @@
       </section>
     </main>
 
-    <footer>
-      <div class="container">
-        <p>جميع الحقوق محفوظة © دار أبناء سلنارتي بالرياض 2024</p>
-        <p>
-          للاستفسارات التقنية:
-          <a href="mailto:salanarty@gmail.com">salanarty@gmail.com</a> | هاتف
-          الدعم: <a href="mailto:salanarty@gmail.com">+966502191635</a>
-        </p>
-        <p style="font-size: 12px; margin-top: 10px; color: #888">
-          إصدار التقرير: 2.0 | تم التحديث: <span id="lastUpdateDate"></span>
-        </p>
+    <!-- بداية الفوتر الجديد -->
+    <footer class="modern-footer">
+      <div class="container footer-container">
+        <div class="footer-col about-col">
+          <h3><i class="fas fa-building"></i> دار أبناء سلنارتي</h3>
+          <p>
+            النظام التقني الشامل لإدارة الاشتراكات والمصروفات ولجان الدار
+            بالرياض.
+          </p>
+        </div>
+        <div class="footer-col links-col">
+          <h3><i class="fas fa-link"></i> روابط سريعة</h3>
+          <ul>
+            <li><a href="./index.html">الصفحة الرئيسية</a></li>
+            <li><a href="./accounts.html">سجل الحسابات</a></li>
+            <li><a href="./members.html">قائمة الأعضاء</a></li>
+            <li><a href="./reports.html">التقارير المالية</a></li>
+          </ul>
+        </div>
+        <div class="footer-col contact-col">
+          <h3><i class="fas fa-headset"></i> الدعم الفني</h3>
+          <p>
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:salanarty@gmail.com">salanarty@gmail.com</a>
+          </p>
+          <p>
+            <i class="fab fa-whatsapp"></i>
+            <a
+              href="https://wa.me/966502191635"
+              target="_blank"
+              title="تواصل معنا عبر واتساب"
+              aria-label="تواصل معنا عبر واتساب"
+              dir="ltr"
+              rel="noopener noreferrer"
+              >+966 50 219 1635</a
+            >
+          </p>
+          <p>
+            <i class="fas fa-phone"></i
+            ><a
+              href="tel:+966510219163"
+              target="_blank"
+              title="تواصل معنا عبر الهاتف"
+              aria-label="تواصل معنا عبر الهاتف"
+              dir="ltr"
+              rel="noopener noreferrer"
+              >+966 51 021 9163</a
+            >
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="container footer-bottom-container">
+          <p>جميع الحقوق محفوظة © دار أبناء سلنارتي بالرياض 2024</p>
+          <p class="version">الإصدار 1.0.1</p>
+        </div>
       </div>
     </footer>
+
+    <!-- زر الصعود للأعلى -->
+    <button id="backToTopBtn" title="العودة للأعلى">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    <!-- نهاية الفوتر الجديد -->
 
     <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script src="db/supabase-config.js"></script>

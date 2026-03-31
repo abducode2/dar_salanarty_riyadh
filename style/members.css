@@ -12,7 +12,7 @@ header {
     box-shadow: var(--box-shadow);
     border-bottom-right-radius: var(--border-radius);
     border-bottom-left-radius: var(--border-radius);
-    margin-bottom: 40px;
+
 }
 
 /* .logo-container {
@@ -377,14 +377,14 @@ table.dataTable tbody tr:hover {
     gap: 10px;
 }
 
-footer {
+/* footer {
     text-align: center;
     padding: 30px 0;
     color: var(--gray-color);
     font-size: 0.9rem;
     border-top: 1px solid #eee;
     margin-top: 40px;
-}
+} */
 
 .modal {
     display: none;

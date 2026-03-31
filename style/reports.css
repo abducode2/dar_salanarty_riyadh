@@ -610,12 +610,12 @@ td {
 }
 
 /* الفوتر */
-footer {
+/* footer {
     text-align: center;
     margin-top: 40px;
     color: var(--gray-color);
     font-size: 0.9rem;
-}
+} */
 
 /* للشاشات الصغيرة */
 @media (max-width: 768px) {

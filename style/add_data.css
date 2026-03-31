@@ -18,7 +18,7 @@ header {
     box-shadow: var(--box-shadow);
     border-bottom-right-radius: var(--border-radius);
     border-bottom-left-radius: var(--border-radius);
-    margin-bottom: 40px;
+
 }
 
 .logo-container {
@@ -445,12 +445,12 @@ button {
 }
 
 /* الفوتر */
-footer {
+/* footer {
     text-align: center;
     margin-top: 40px;
     color: var(--gray-color);
     font-size: 0.9rem;
-}
+} */
 
 /* للشاشات الصغيرة */
 @media (max-width: 768px) {

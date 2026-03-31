@@ -14,7 +14,7 @@ body {
   max-width: 1200px;
   margin: 20px auto;
   padding: 20px;
-  text-align: center;
+
 }
 
 
@@ -48,8 +48,8 @@ body {
   border: 1px solid #646060;
   border-radius: 6px;
   width: 150px;
-padding: 0 10px;
-background: #d6dbe2;
+  padding: 0 10px;
+  background: #d6dbe2;
 }
 
 .orientation-options label {
