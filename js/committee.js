@@ -14,24 +14,24 @@ let currentCommittee = {
 let selectedMembers = new Set();
 
 // تهيئة الصفحة
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
   console.log("🚀 بدء تهيئة صفحة لجنة الإدارة...");
 
   // تهيئة Supabase (إن وُجد)
-  if (typeof supabaseInit === "function") supabaseInit();
-  else
-    console.warn(
-      "Supabase init not found; committee page may not function properly.",
-    );
+  if (typeof window.supabaseInit === "function") {
+    await window.supabaseInit();
+  } else {
+    console.warn("Supabase init not found; committee page may not function properly.");
+  }
 
   // جلب الأعضاء وتعبئة القوائم
-  loadMembers();
+  await loadMembers();
 
   // إعداد الأحداث
   setupEventListeners();
 
   // تحميل التشكيل السابق
-  loadSavedCommittee();
+  await loadSavedCommittee();
 
   console.log("✅ تم تهيئة الصفحة بنجاح");
 });
@@ -597,14 +597,13 @@ async function saveCommittee() {
 // حفظ في قاعدة البيانات (Supabase)
 async function saveCommitteeToDatabase() {
   try {
-    // هنا يمكنك إضافة كود لحفظ التشكيل في قاعدة البيانات
-    // مثلاً في جدول committee_members
     console.log("💾 حفظ تشكيل اللجنة في قاعدة البيانات...");
-
-    // محاكاة عملية الحفظ
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    console.log("✅ تم الحفظ في قاعدة البيانات");
+    const dataToSave = {
+      committee: currentCommittee,
+      selectedMembers: Array.from(selectedMembers)
+    };
+    await window.supabaseDB.saveCommitteeData(dataToSave);
+    console.log("✅ تم الحفظ في قاعدة البيانات بنجاح");
   } catch (error) {
     console.error("❌ خطأ في حفظ قاعدة البيانات:", error);
     throw error;
@@ -612,17 +611,35 @@ async function saveCommitteeToDatabase() {
 }
 
 // تحميل التشكيل المحفوظ
-function loadSavedCommittee() {
+async function loadSavedCommittee() {
   try {
-    const saved = localStorage.getItem("committee_saved");
-    const autoSaved = localStorage.getItem("committee_auto_save");
+    let data = null;
+    let savedDate = null;
 
-    // الأفضلية للتشكيل المحفوظ يدوياً
-    const data = saved
-      ? JSON.parse(saved)
-      : autoSaved
-        ? JSON.parse(autoSaved)
-        : null;
+    if (typeof window.supabaseDB !== "undefined") {
+      try {
+        const dbData = await window.supabaseDB.getCommitteeData();
+        if (dbData && dbData.data && Object.keys(dbData.data).length > 0) {
+           data = dbData.data;
+           savedDate = dbData.updated_at;
+           console.log("تم استرجاع التشكيل من قاعدة البيانات");
+        }
+      } catch (e) {
+        console.warn("خطأ في جلب بيانات اللجنة من السحابة:", e);
+      }
+    }
+
+    if (!data) {
+      const saved = localStorage.getItem("committee_saved");
+      const autoSaved = localStorage.getItem("committee_auto_save");
+  
+      // الأفضلية للتشكيل المحفوظ يدوياً
+      data = saved
+        ? JSON.parse(saved)
+        : autoSaved
+          ? JSON.parse(autoSaved)
+          : null;
+    }
 
     if (data && data.committee) {
       // استعادة البيانات
@@ -636,7 +653,7 @@ function loadSavedCommittee() {
       updateMembersList();
       updateMembersCount();
       updateCurrentCommittee();
-      updateLastUpdateInfo();
+      updateLastUpdateInfo(savedDate);
 
       showMessage("تم تحميل التشكيل السابق", "success");
     }
@@ -733,26 +750,27 @@ function clearAllSelections() {
 }
 
 // تحديث معلومات آخر تحديث
-function updateLastUpdateInfo() {
+function updateLastUpdateInfo(savedDateStr = null) {
   const lastUpdateInfo = document.getElementById("lastUpdateInfo");
-  const saved = localStorage.getItem("committee_saved");
+  let dateToUse = null;
 
-  if (saved) {
-    try {
-      const data = JSON.parse(saved);
-      const date = new Date(data.savedAt);
-      lastUpdateInfo.innerHTML = `
-                <p><strong>آخر تحديث:</strong> ${date.toLocaleString(
-                  "ar-SA",
-                )}</p>
-                <p><strong>عدد الأعضاء:</strong> ${
-                  data.committee.members.length + 6
-                }</p>
-                <p><strong>حالة الحفظ:</strong> <span style="color: #28a745;">محفوظ</span></p>
-            `;
-    } catch (error) {
-      lastUpdateInfo.innerHTML = `<p>خطأ في قراءة بيانات آخر تحديث</p>`;
+  if (savedDateStr) {
+    dateToUse = new Date(savedDateStr);
+  } else {
+    const saved = localStorage.getItem("committee_saved");
+    if (saved) {
+      try {
+        const data = JSON.parse(saved);
+        dateToUse = new Date(data.savedAt);
+      } catch (e) {}
     }
+  }
+
+  if (dateToUse) {
+    lastUpdateInfo.innerHTML = `
+      <p><strong>آخر تحديث:</strong> ${dateToUse.toLocaleString("ar-SA")}</p>
+      <p><strong>حالة الحفظ:</strong> <span style="color: #28a745;">تم المزامنة مع قاعدة البيانات السحابية (Supabase)</span></p>
+    `;
   } else {
     lastUpdateInfo.innerHTML = `<p>لم يتم حفظ أي تشكيل سابق</p>`;
   }
