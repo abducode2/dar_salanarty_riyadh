@@ -329,6 +329,36 @@
     return data || [];
   }
 
+  async function saveCommitteeData(committeeData) {
+    const supabase = ensure();
+    const { data, error } = await supabase
+      .from("committee")
+      .upsert({ id: 1, data: committeeData, updated_at: new Date().toISOString() })
+      .select();
+    if (error) {
+      console.error("خطأ في حفظ بيانات اللجنة:", error);
+      throw error;
+    }
+    return data && data.length > 0 ? data[0] : null;
+  }
+
+  async function getCommitteeData() {
+    const supabase = ensure();
+    const { data, error } = await supabase
+      .from("committee")
+      .select("data, updated_at")
+      .eq("id", 1)
+      .single();
+    if (error) {
+      if (error.code === 'PGRST116') {
+        return null;
+      }
+      console.error("خطأ في جلب بيانات اللجنة:", error);
+      throw error;
+    }
+    return data;
+  }
+
   window.supabaseDB = {
     testConnection,
     getAllMembersWithSubscriptions,
@@ -346,5 +376,7 @@
     createMember,
     addExpense,
     getAllExpenses,
+    saveCommitteeData,
+    getCommitteeData,
   };
 })();
