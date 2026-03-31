@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>دار أبناء سلنارتي - الحسابات</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style/style.css" />
+    <link rel="stylesheet" href="style/accounts.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="logo-container">
+          <div class="logo">
+            <i class="fas fa-file-invoice-dollar"></i>
+          </div>
+          <div>
+            <h1>دار أبناء سلنارتي بالرياض</h1>
+            <p class="subtitle">نظام إدارة الحسابات والمصروفات</p>
+          </div>
+        </div>
+
+        <div class="nav-links">
+          <a href="./index.html"><i class="fas fa-home"></i> الرئيسية</a>
+          <a href="./add_data.html"
+            ><i class="fas fa-user-plus"></i> إضافة عضو جديد</a
+          >
+          <a href="./members.html"
+            ><i class="fas fa-users"></i> قائمة الأعضاء</a
+          >
+          <a href="./reports.html"><i class="fas fa-chart-bar"></i> التقارير</a>
+          <a href="./accounts.html" class="active"
+            ><i class="fas fa-file-invoice-dollar"></i> الحسابات</a
+          >
+          <a href="./committee.html"
+            ><i class="fas fa-users-cog"></i> لجنة الإدارة</a
+          >
+          <a href="./certificates.html"
+            ><i class="fas fa-certificate"></i> شهادات التقدير</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <div id="message" class="message"></div>
+
+      <section class="summary-section">
+        <h2 class="section-title">
+          <i class="fas fa-wallet"></i> ملخص الحسابات
+        </h2>
+        <div class="summary-cards" id="accountsSummary">
+          <div class="summary-card revenue">
+            <div class="card-icon"><i class="fas fa-arrow-up"></i></div>
+            <div class="card-details">
+              <h3>إجمالي الإيرادات (الاشتراكات)</h3>
+              <p id="totalRevenue">0 ريال</p>
+            </div>
+          </div>
+          <div class="summary-card expenses">
+            <div class="card-icon"><i class="fas fa-arrow-down"></i></div>
+            <div class="card-details">
+              <h3>إجمالي المصروفات</h3>
+              <p id="totalExpenses">0 ريال</p>
+            </div>
+          </div>
+          <div class="summary-card balance">
+            <div class="card-icon"><i class="fas fa-coins"></i></div>
+            <div class="card-details">
+              <h3>صافي الرصيد</h3>
+              <p id="netBalance">0 ريال</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="add-expense-section">
+        <h2 class="section-title">
+          <i class="fas fa-plus-circle"></i> إضافة مصروف جديد
+        </h2>
+        <form id="expenseForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="expenseType" class="required">نوع المصروف</label>
+              <select id="expenseType" required>
+                <option value="">اختر نوع المصروف</option>
+                <option value="إيجار الدار">إيجار الدار</option>
+                <option value="توصيل مياه">توصيل مياه</option>
+                <option value="فاتورة كهرباء">فاتورة كهرباء</option>
+                <option value="صيانة">صيانة</option>
+                <option value="أخرى">خصومات أخرى</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="expenseAmount" class="required">المبلغ (ريال)</label>
+              <input
+                type="number"
+                id="expenseAmount"
+                placeholder="أدخل المبلغ"
+                min="1"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="expenseDate" class="required">تاريخ المصروف</label>
+              <input type="date" id="expenseDate" required />
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label for="expenseNotes">ملاحظات والتفاصيل</label>
+            <input
+              type="text"
+              id="expenseNotes"
+              placeholder="تفاصيل إضافية عن المصروف (اختياري)"
+            />
+          </div>
+          <div class="action-buttons">
+            <button type="submit" id="saveExpenseBtn" class="btn-primary">
+              <i class="fas fa-save"></i> حفظ المصروف
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="expenses-list-section">
+        <h2 class="section-title">
+          <i class="fas fa-list-alt"></i> سجل المصروفات
+        </h2>
+        <div class="table-container">
+          <table id="expensesTable" class="display">
+            <thead>
+              <tr>
+                <th>التاريخ</th>
+                <th>نوع المصروف</th>
+                <th>المبلغ (ريال)</th>
+                <th>تفاصيل/ملاحظات</th>
+              </tr>
+            </thead>
+            <tbody id="expensesTableBody">
+              <!-- JS Populated -->
+            </tbody>
+          </table>
+          <div class="loading" id="tableLoading" style="display: none">
+            <div class="spinner"></div>
+            <p>جاري تحميل البيانات...</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>جميع الحقوق محفوظة © دار أبناء سلنارتي بالرياض 2024</p>
+        <p>
+          للاستفسارات التقنية:
+          <a href="mailto:salanarty@gmail.com">salanarty@gmail.com</a> | هاتف
+          الدعم: <a href="tel:+966502191635">+966502191635</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="db/supabase-config.js"></script>
+    <script src="db/supabase-init.js"></script>
+    <script src="db/supabase-db.js"></script>
+    <script src="js/accounts.js"></script>
+    <script src="js/auth.js"></script>
+  </body>
+</html>

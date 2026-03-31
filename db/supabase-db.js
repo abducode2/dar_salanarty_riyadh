@@ -303,6 +303,32 @@
     return data && data.length > 0 ? data[0] : null;
   }
 
+  async function addExpense(expenseData) {
+    const supabase = ensure();
+    const { data, error } = await supabase
+      .from("expenses")
+      .insert([expenseData])
+      .select();
+    if (error) {
+      console.error("خطأ في إضافة المصروف:", error);
+      throw error;
+    }
+    return data && data.length > 0 ? data[0] : null;
+  }
+
+  async function getAllExpenses() {
+    const supabase = ensure();
+    const { data, error } = await supabase
+      .from("expenses")
+      .select("*")
+      .order("expense_date", { ascending: false });
+    if (error) {
+      console.error("خطأ في جلب المصروفات:", error);
+      throw error;
+    }
+    return data || [];
+  }
+
   window.supabaseDB = {
     testConnection,
     getAllMembersWithSubscriptions,
@@ -318,5 +344,7 @@
     getAllSubscriptions,
     getSubscriptionById,
     createMember,
+    addExpense,
+    getAllExpenses,
   };
 })();
