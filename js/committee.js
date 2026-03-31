@@ -1,4 +1,5 @@
 // صفحة لجنة إدارة الدار
+// تم اضافة صلاحيات الادمن
 let allMembers = [];
 let currentCommittee = {
   housePresident: null,
@@ -20,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (typeof supabaseInit === "function") supabaseInit();
   else
     console.warn(
-      "Supabase init not found; committee page may not function properly."
+      "Supabase init not found; committee page may not function properly.",
     );
 
   // جلب الأعضاء وتعبئة القوائم
@@ -75,7 +76,7 @@ function populateMemberSelects() {
 
   // فرز الأعضاء حسب الاسم
   const sortedMembers = [...allMembers].sort((a, b) =>
-    a.name.localeCompare(b.name)
+    a.name.localeCompare(b.name),
   );
 
   // الحصول على جميع عناصر الـ select
@@ -251,8 +252,8 @@ function updateMembersList() {
                 <div class="member-phone">${member.phone}</div>
                 <div style="font-size: 12px; color: #6c757d; margin-top: 5px;">
                     سنة الانضمام: ${member.joinYear} | الحالة: ${getStatusText(
-      member.status
-    )}
+                      member.status,
+                    )}
                 </div>
             </div>
             <button type="button" class="remove-member-btn" data-index="${index}">
@@ -317,7 +318,7 @@ function updateMemberInfo(selectId, memberId) {
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <strong style="color: #2c5aa0;">${member.name}</strong>
             <span style="background-color: ${getStatusColor(
-              member.status
+              member.status,
             )}; color: white; padding: 3px 10px; border-radius: 12px; font-size: 12px;">
                 ${status}
             </span>
@@ -435,7 +436,7 @@ function updateCurrentCommittee() {
         position.title,
         position.badgeClass,
         null,
-        position.key
+        position.key,
       );
     }
   });
@@ -464,7 +465,7 @@ function addMemberToTable(
   position,
   badgeClass,
   memberIndex = null,
-  positionKey = null
+  positionKey = null,
 ) {
   const row = document.createElement("tr");
   row.innerHTML = `
@@ -484,7 +485,7 @@ function addMemberToTable(
         <td>${member.phone}</td>
         <td>
             <span style="background-color: ${getStatusColor(
-              member.status
+              member.status,
             )}; color: white; padding: 3px 10px; border-radius: 12px; font-size: 12px;">
                 ${getStatusText(member.status)}
             </span>
@@ -549,7 +550,7 @@ function autoSaveCommittee() {
         committee: currentCommittee,
         selectedMembers: Array.from(selectedMembers),
         timestamp: new Date().toISOString(),
-      })
+      }),
     );
   } catch (error) {
     console.warn("لا يمكن حفظ التشكيل تلقائياً:", error);
@@ -575,7 +576,7 @@ async function saveCommittee() {
         selectedMembers: Array.from(selectedMembers),
         savedAt: new Date().toISOString(),
         savedBy: "user",
-      })
+      }),
     );
 
     // تحديث معلومات آخر تحديث
@@ -620,8 +621,8 @@ function loadSavedCommittee() {
     const data = saved
       ? JSON.parse(saved)
       : autoSaved
-      ? JSON.parse(autoSaved)
-      : null;
+        ? JSON.parse(autoSaved)
+        : null;
 
     if (data && data.committee) {
       // استعادة البيانات
@@ -674,7 +675,7 @@ function updateSelectValues() {
 function resetCommittee() {
   if (
     confirm(
-      "هل تريد استعادة التشكيل السابق المحفوظ؟ سيتم فقدان التغييرات غير المحفوظة."
+      "هل تريد استعادة التشكيل السابق المحفوظ؟ سيتم فقدان التغييرات غير المحفوظة.",
     )
   ) {
     loadSavedCommittee();
@@ -717,7 +718,7 @@ function clearAllSelections() {
       if (select) select.value = "";
 
       const infoDiv = document.getElementById(
-        selectId.replace("Select", "Info")
+        selectId.replace("Select", "Info"),
       );
       if (infoDiv) infoDiv.classList.remove("show");
     });
@@ -742,7 +743,7 @@ function updateLastUpdateInfo() {
       const date = new Date(data.savedAt);
       lastUpdateInfo.innerHTML = `
                 <p><strong>آخر تحديث:</strong> ${date.toLocaleString(
-                  "ar-SA"
+                  "ar-SA",
                 )}</p>
                 <p><strong>عدد الأعضاء:</strong> ${
                   data.committee.members.length + 6
@@ -766,7 +767,7 @@ function printCommittee() {
         <div style="direction: rtl; font-family: 'Cairo', sans-serif; padding: 20px;">
             <h1 style="text-align: center; color: #2c5aa0;">تشكيل لجنة إدارة دار أبناء سلنارتي</h1>
             <p style="text-align: center;">تاريخ الطباعة: ${new Date().toLocaleString(
-              "ar-SA"
+              "ar-SA",
             )}</p>
             <hr>
             ${printContent}
@@ -797,7 +798,7 @@ function generatePrintContent() {
             ${generatePositionHTML("رئيس اللجنة", currentCommittee.president)}
             ${generatePositionHTML(
               "نائب الرئيس",
-              currentCommittee.vicePresident
+              currentCommittee.vicePresident,
             )}
         </div>
         
@@ -805,11 +806,11 @@ function generatePrintContent() {
             <h2 style="color: #28a745; border-bottom: 2px solid #28a745; padding-bottom: 10px;">الأمانة العامة</h2>
             ${generatePositionHTML(
               "الأمين العام",
-              currentCommittee.secretaryGeneral
+              currentCommittee.secretaryGeneral,
             )}
             ${generatePositionHTML(
               "مساعد الأمين العام",
-              currentCommittee.assistantSecretary
+              currentCommittee.assistantSecretary,
             )}
         </div>
         
@@ -818,7 +819,7 @@ function generatePrintContent() {
             ${generatePositionHTML("أمين المال", currentCommittee.treasurer)}
             ${generatePositionHTML(
               "مساعد أمين المال",
-              currentCommittee.assistantTreasurer
+              currentCommittee.assistantTreasurer,
             )}
             </div>
              <div style="margin-bottom: 15px;">
@@ -826,11 +827,11 @@ function generatePrintContent() {
             
             ${generatePositionHTML(
               "رئيس الدار",
-              currentCommittee.housePresident
+              currentCommittee.housePresident,
             )} 
             ${generatePositionHTML(
               "مساعد رئيس الدار",
-              currentCommittee.assistantHousePresident
+              currentCommittee.assistantHousePresident,
             )} <!-- إضافة جديدة -->
         </div>
     `;
@@ -914,7 +915,7 @@ function generatePrintContent() {
                                         direction: ltr;
                                     ">${member.phone}</td>
                                 </tr>
-                            `
+                            `,
                           )
                           .join("")}
                     </tbody>
@@ -959,7 +960,7 @@ function calculateTotalPaid(member) {
   if (!member.subscriptions) return 0;
   return member.subscriptions.reduce(
     (sum, sub) => sum + (sub.amount_paid || sub.paid || 0),
-    0
+    0,
   );
 }
 
@@ -967,7 +968,7 @@ function calculateTotalDue(member) {
   if (!member.subscriptions) return 0;
   return member.subscriptions.reduce(
     (sum, sub) => sum + (sub.amount_due || sub.amount || 0),
-    0
+    0,
   );
 }
 
